@@ -1,0 +1,28 @@
+INPUT_FILE_LIST             trees10.list
+TREE_NAME                   tree
+PROJ_REAC_OUT_PATH	    projReactionOut
+RECL_REAC_OUT_PATH	    recReactionOut
+PROJ_DECAY_PATH		    projDec
+
+<---END_OF_PARAMETERS--->
+
+Sample parameter file for imposing Coulex angular distribution on simulated data.
+
+Parameter list:
+
+INPUT_FILE_LIST - Path to a list of ROOT files (plaintext, one file path per line) to take tree data from.
+
+TREE_NAME - Name of the tree inside the specified ROOT file(s) containing sort and gate data.
+
+PROJ_REAC_OUT_PATH - Projectile reactoin out path. Should contain information on position and momentum of the projectile (beam) nucleus exiting the reaction.
+
+RECL_REAC_OUT_PATH - As above but for the recoil (target) nucleus.
+
+PROJ_DECAY_PATH - Projectile decay path. Contains information on the position and momentum of the projectile when it decays by gamma-ray emission.
+
+GAMMA_X/Y/Z - First interaction position (x,y,z) of the  gamma-ray in the HPGe array.
+
+
+
+
+

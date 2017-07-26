@@ -1,0 +1,44 @@
+INPUT_FILE_LIST             trees10.list
+TREE_NAME                   tree
+SORT_PATH                   GEAddBack
+WEIGHT_PATH		    GWAddBack
+SORT_DATA_SCALING_FACTOR    4.
+SORT_DATA_FWHM_RESPONSE     yes
+POS_PATH		    GIdAddBack
+COL_PATH		    GSegAddBack
+CSI_PATH		    rHit/Id
+FWHM_F                      2.27558 
+FWHM_G                      3.78329 
+FWHM_H                      0.66543
+GROUP_MAP_PATH		    doppler_groups.par
+OUTPUT_FILE                 sim_TigressGroup_0.25keVCh.fmca
+
+<---END_OF_PARAMETERS--->
+
+This is a configuration file for the tree2mca and tree2mca_gated codes.
+If you change the format of the file, prepare for unforseen
+consequences.
+
+Parameter list:
+
+INPUT_FILE - Path to a single ROOT file to take tree data from.  Incompatible with INPUT_FILE_LIST.
+INPUT_FILE_LIST - Path to a list of ROOT files (plaintext, one file path per line) to take tree data from.  Incompatible with INPUT_FILE.
+
+TREE_NAME - Name of the tree inside the specified ROOT file(s) containing sort and gate data.  If sort and gate data are in different trees, use SORT_TREE_NAME and GATE_TREE_NAME (tree2mca_gated only) instead.
+SORT_PATH - Path to the branch/leaf containing the data to be sorted.  Folder paths are designated with forward slashes eg. 'resDec/E' sorts data from the leaf with name 'E' in the branch 'resDec'.
+GATE_PATH - (tree2mca_gated only) Path to the branch/leaf containing gate data.  Folder paths are designated with forward slashes as in SORT_PATH.
+
+SORT_DATA_SCALING_FACTOR - Multiplicative factor to scale sorted data by before writing the .mca file.  Applied before SORT_DATA_SHIFT.  Default: 1.
+SORT_DATA_SHIFT - Number of bins to shift sorted data by before writing the .mca file.  Default: 0.
+GATE_DATA_SCALING_FACTOR - (tree2mca_gated only) Multiplicative factor to scale gates by before writing the .mca file.  Applied before GATE_DATA_SHIFT.  Default: 1.
+GATE_DATA_SHIFT - (tree2mca_gated only) Numerical value to shift gates by before writing the .mca file.  Default: 0.
+Note that gate values smaller than 0 and larger than S32K (32768, unless redefined by the user in common.h) will be discarded.
+CUSTOM_GATE_FILE - (tree2mca_gated only) Path to a plaintext file containing custom gate definitions.  The custom gate file should contain line seperated numbers denoting the boundaries of individual gates.  In the included 'custom gates' file there are 6 gated regions, the first corresponding to tree entries where the gate data falls between 1.09 and 1.05 (lower bound inclusive), and the last corresponding to entries where the gate data falls between 0.95 and 0.92.  Custom gate boundaries may be listed in ascending or descending order.  Using this option sepercedes GATE_DATA_SCALING_FACTOR and GATE_DATA_SHIFT.
+
+SORT_DATA_FWHM_RESPONSE
+yes: Apply FWHM response parameters to broaden peaks in the resulting .mca file.
+no: Don't apply FWHM response function.
+FWHM_F, FWHM_G, FWHM_H - Parameters for the FWHM response function, defined as FWHM = sqrt(F*F + G*G*x + H*H*x*x), where x is the .mca channel number / 1000.
+
+OUTPUT_FILE - Name of the output .mca file.
+For tree2mca_gated, the OUTPUT_FILE parameter is optional - if used, all data will be sorted into a single .mca file with the filename specified.  Otherwise, individual .mca files for each root tree will be generated with matching filenames.
